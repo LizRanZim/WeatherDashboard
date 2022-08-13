@@ -3,3 +3,14 @@
     padding: 5px;
 }
 
+.favorable {
+    background-color: green;
+}
+
+.moderate {
+    background-color: gray;
+}
+
+.severe {
+    background-color: red;
+}

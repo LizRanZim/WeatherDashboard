@@ -17,12 +17,16 @@ function () {
 
 var searchedCityInput = document.querySelector("#searchedCity")
 
+var searchedCityHero = document.querySelector ('.currentCity')
+
 // assign var 
 var searchedCity
 
 // assign input value to var above
 searchedCity = searchedCityInput.value;
 console.log(searchedCity);
+
+searchedCityHero.textContent = searchedCityInput.value;
 
 // sets value of searched city to local storage
 localStorage.setItem("searchedCity1", JSON.stringify(searchedCity));
@@ -34,53 +38,94 @@ searchedCity1.textContent = JSON.parse(getSearchedCity);
 
 // gets value of searched city and puts it in url for the fetch command
 
-
-var queryString = 'http://api.openweathermap.org/data/2.5/weather?q='+ searchedCity +',us&units=imperial&APPID=555236abef175d6b5cdeb815c985d1b6';
-
-console.log (queryString);
+// get lat and lon of searched city
 
 
 
-// fetch('http://api.openweathermap.org/data/2.5/weather?q=Chicago,us&APPID=555236abef175d6b5cdeb815c985d1b6')
+// function () {
+
+// }
+
+// Replace url with https://api.openweathermap.org/data/2.5/onecall?lat=33.44&lon=-94.04&exclude=hourly,daily&appid={API key}
+
+var queryLatLon = 'http://api.openweathermap.org/data/2.5/weather?q='+ searchedCity +',us&units=imperial&APPID=555236abef175d6b5cdeb815c985d1b6';
+
+console.log (queryLatLon);
 
 // Resource > https://openweathermap.org/api/geocoding-api
 
-// fetch('http://api.openweathermap.org/data/2.5/weather?q=Chicago,us&APPID=555236abef175d6b5cdeb815c985d1b6');
 
-fetch (queryString)
-
-// Endpoint:
-// - Please, use the endpoint api.openweathermap.org for your API calls
-// - Example of API call:
-// api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=555236abef175d6b5cdeb815c985d1b6
-
-// Useful links:
-// - API documentation https://openweathermap.org/api
+fetch (queryLatLon)
 
   .then(function (response) {
     return response.json();
   })
   .then(function (data) {
     console.log(data);
+
+var latSearchedCity = data.coord.lat
+console.log(latSearchedCity);
+
+var lonSearchedCity = data.coord.lon
+console.log(lonSearchedCity);
+
+var queryGetWeather = 'https://api.openweathermap.org/data/2.5/onecall?lat='+ latSearchedCity +'&lon='+ lonSearchedCity+'&exclude=hourly,minutely&units=imperial&APPID=555236abef175d6b5cdeb815c985d1b6';
+
+console.log(queryGetWeather);
+
+fetch(queryGetWeather)
+.then(function (response) {
+  return response.json();
+})
+.then (function (data2) {
+  console.log(data2);
+
+
+var todayTemp = document.querySelector('.todayTemp');
+
+todayTemp.textContent = data.main.temp + ' ° F';
+
+var todayWind = document.querySelector('.todayWind'); 
+
+todayWind.textContent = data.wind.speed + ' mph';
+
+var todayHumidity = document.querySelector('.todayHumidity');
+
+todayHumidity.textContent = data.main.humidity + '%';
+
+var todayUv = document.querySelector('.todayUv');
+
+todayUv.textContent = data2.current.uvi;
+
+// code to log whether background color class should switch
+// if (data2.current.uvi <=2) {
+//   console.log(favorable);
+// } else if (data2.current.uvi >=5){
+//   console.log(moderate);
+// } else {
+//   console.log(severe)}
+
+
+// code to display date
+var today = new Date();
+
+var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+
+var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+
+var dateTime = date+' '+time;
+console.log (today)
+
+// code to display 5 day forecast
+
+// create a for loop to loop through the daily forecast and show the future forecast for the next 5 days and create a card for each day with the date, icon, temp, wind, humidity
+  
+})
+
+})
+  
   });
 
-  // Vars for where we will put data for today's weather
-// function printResults (resultObj) {
-//   console.log(resultObj);
-//   // set up vars to display results
-  
-//   var todayTemp = document.querySelector('.todayTemp');
-
-//   var todayWind = document.querySelector('.todayTemp'); 
-
-//   var todayHumidity = document.querySelector('.todayHumidity');
-
-//   var todayUv = document.querySelector('.todayUv');
-
-
-// }
-
-// printResults(data);
 
 
 
@@ -97,7 +142,7 @@ fetch (queryString)
 // JSON object is what the object will return store as if we have variable called response we would use dot notation to get to the variable we want response.current.clouds for weather we want response.current.weather[0] and that would give us what is in curly and then to dig deeper into the array we would do response.current.weather.[0].main to grab that value
 
 
-});
+
 
 
 // fetch the data from the weather API current weather and future forecast
