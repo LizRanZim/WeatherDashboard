@@ -81,7 +81,7 @@ searchBtn.addEventListener("click",
             console.log(data2);
 
             // display icons logic for curent weather
-var currentCityIcon = document.querySelector('.currentCityIcon');
+var currentCityIcon = document.querySelector('.currentCityImg');
 
 var currentCityIconCode = data2.current.weather[0].icon
 console.log(currentCityIconCode);
@@ -91,6 +91,7 @@ var queryGetIcon = 'https://openweathermap.org/img/wn/' + currentCityIconCode + 
 
 console.log(queryGetIcon);
 
+currentCityIcon.setAttribute('src', queryGetIcon);
 
 
 // use this url syntax to pass the right icon into the url to display it http://openweathermap.org/img/wn/10d@2x.png
