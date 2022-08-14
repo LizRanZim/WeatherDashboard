@@ -17,7 +17,7 @@
   <div id="heading">
     <div class="jumbotron jumbotron-fluid">
       <div class="container">
-        <h1 class="display-4">Weather Dashboard</h1>
+        <h1 class="display-4">Weather Dashboard</h1><p>Enter a city and click submit to get the weather</p>
             </div>
     </div>
   </div>
@@ -28,7 +28,7 @@
     <input type="text" id = "searchedCity" class="form-control" placeholder="Search for a city" aria-label="City Name"
       aria-describedby="button-addon2">
     <div class="input-group-append">
-      <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
+      <button class="btn btn-outline-secondary" type="button" id="button-addon2">Submit</button>
     </div>
   </div>
 
@@ -37,7 +37,8 @@
   <div class="card">
     <div class="card-body">
       <h3>Current Forecast for<span class = currentCity>(Choose a City)</span>
-        <span class = currentCityIcon></span></h3>
+        <span class = currentCityIcon></span> 
+      </h3>
         <h4><span class = currentDate></span></h4>
       
      <ol>
@@ -108,7 +109,7 @@
   </div> -->
 
 
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
   <script src="./Develop/script.js"></script>
 
 

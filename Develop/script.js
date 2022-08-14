@@ -80,11 +80,19 @@ searchBtn.addEventListener("click",
           .then(function (data2) {
             console.log(data2);
 
-            // display icons logic
+            // display icons logic for curent weather
 var currentCityIcon = document.querySelector('.currentCityIcon');
 
-currentCityIcon.textContent = data2.current.weather[0].icon;
-console.log(currentCityIcon);
+var currentCityIconCode = data2.current.weather[0].icon
+console.log(currentCityIconCode);
+
+
+var queryGetIcon = 'https://openweathermap.org/img/wn/' + currentCityIconCode + '@2x.png';
+
+console.log(queryGetIcon);
+
+
+
 // use this url syntax to pass the right icon into the url to display it http://openweathermap.org/img/wn/10d@2x.png
 
 // display weather
@@ -141,7 +149,12 @@ console.log(currentCityIcon);
               var fivedayCardBody = document.createElement('div');
               fivedayCardBody.setAttribute('class', 'card-body card-color');
               //  Need to figure out date part so it shows the new date for each container (right now just showing dt value from data) maybe easier to use moment.js
+              // https://stackoverflow.com/questions/53403249/using-moment-object-in-for-loop
+
+              
               var fivedayDate = document.createElement('h5');
+
+
               fivedayDate.textContent = data2.daily[i].dt;
               // var readable_date = (dtDate).toDateString(); 
               // console.log(readable_date);
