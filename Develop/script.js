@@ -8,122 +8,162 @@ var searchedCity1 = document.querySelector(".searchedCity1")
 
 searchBtn.addEventListener("click",
 
-// tests event listener
-function () {
+  // tests event listener
+  function () {
     console.log('fun times');
-      
-
-// on click reach into input box
-
-var searchedCityInput = document.querySelector("#searchedCity")
-
-var searchedCityHero = document.querySelector ('.currentCity')
-
-// assign var 
-var searchedCity
-
-// assign input value to var above
-searchedCity = searchedCityInput.value;
-console.log(searchedCity);
-
-searchedCityHero.textContent = searchedCityInput.value;
-
-// sets value of searched city to local storage
-localStorage.setItem("searchedCity1", JSON.stringify(searchedCity));
-
-// gets value of searched city and displays it in searched city area
-var getSearchedCity = localStorage.getItem("searchedCity1");
-
-searchedCity1.textContent = JSON.parse(getSearchedCity);
-
-// gets value of searched city and puts it in url for the fetch command
-
-// get lat and lon of searched city
 
 
+    // on click reach into input box
 
-// function () {
+    var searchedCityInput = document.querySelector("#searchedCity")
 
-// }
+    var searchedCityHero = document.querySelector('.currentCity')
 
-// Replace url with https://api.openweathermap.org/data/2.5/onecall?lat=33.44&lon=-94.04&exclude=hourly,daily&appid={API key}
+    // assign var 
+    var searchedCity
 
-var queryLatLon = 'http://api.openweathermap.org/data/2.5/weather?q='+ searchedCity +',us&units=imperial&APPID=555236abef175d6b5cdeb815c985d1b6';
+    // assign input value to var above
+    searchedCity = searchedCityInput.value;
+    console.log(searchedCity);
 
-console.log (queryLatLon);
+    searchedCityHero.textContent = searchedCityInput.value;
 
-// Resource > https://openweathermap.org/api/geocoding-api
+    // sets value of searched city to local storage
+    localStorage.setItem("searchedCity1", JSON.stringify(searchedCity));
 
+    // gets value of searched city and displays it in searched city area
+    var getSearchedCity = localStorage.getItem("searchedCity1");
 
-fetch (queryLatLon)
+    searchedCity1.textContent = JSON.parse(getSearchedCity);
 
-  .then(function (response) {
-    return response.json();
-  })
-  .then(function (data) {
-    console.log(data);
+    // gets value of searched city and puts it in url for the fetch command
 
-var latSearchedCity = data.coord.lat
-console.log(latSearchedCity);
-
-var lonSearchedCity = data.coord.lon
-console.log(lonSearchedCity);
-
-var queryGetWeather = 'https://api.openweathermap.org/data/2.5/onecall?lat='+ latSearchedCity +'&lon='+ lonSearchedCity+'&exclude=hourly,minutely&units=imperial&APPID=555236abef175d6b5cdeb815c985d1b6';
-
-console.log(queryGetWeather);
-
-fetch(queryGetWeather)
-.then(function (response) {
-  return response.json();
-})
-.then (function (data2) {
-  console.log(data2);
+    // get lat and lon of searched city
 
 
-var todayTemp = document.querySelector('.todayTemp');
 
-todayTemp.textContent = data.main.temp + ' ° F';
+    // function () {
 
-var todayWind = document.querySelector('.todayWind'); 
+    // }
 
-todayWind.textContent = data.wind.speed + ' mph';
+    // Replace url with https://api.openweathermap.org/data/2.5/onecall?lat=33.44&lon=-94.04&exclude=hourly,daily&appid={API key}
 
-var todayHumidity = document.querySelector('.todayHumidity');
+    var queryLatLon = 'http://api.openweathermap.org/data/2.5/weather?q=' + searchedCity + '&units=imperial&APPID=555236abef175d6b5cdeb815c985d1b6';
 
-todayHumidity.textContent = data.main.humidity + '%';
+    console.log(queryLatLon);
 
-var todayUv = document.querySelector('.todayUv');
-
-todayUv.textContent = data2.current.uvi;
-
-// code to log whether background color class should switch
-// if (data2.current.uvi <=2) {
-//   console.log(favorable);
-// } else if (data2.current.uvi >=5){
-//   console.log(moderate);
-// } else {
-//   console.log(severe)}
+    // Resource > https://openweathermap.org/api/geocoding-api
 
 
-// code to display date
-var today = new Date();
+    fetch(queryLatLon)
 
-var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        console.log(data);
 
-var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+        var latSearchedCity = data.coord.lat
+        console.log(latSearchedCity);
 
-var dateTime = date+' '+time;
-console.log (today)
+        var lonSearchedCity = data.coord.lon
+        console.log(lonSearchedCity);
 
-// code to display 5 day forecast
+        var queryGetWeather = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + latSearchedCity + '&lon=' + lonSearchedCity + '&exclude=hourly,minutely&units=imperial&APPID=555236abef175d6b5cdeb815c985d1b6';
 
-// create a for loop to loop through the daily forecast and show the future forecast for the next 5 days and create a card for each day with the date, icon, temp, wind, humidity
-  
-})
+        console.log(queryGetWeather);
 
-})
-  
+        fetch(queryGetWeather)
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (data2) {
+            console.log(data2);
+
+            // display icons logic
+var currentCityIcon = document.querySelector('.currentCityIcon');
+
+currentCityIcon.textContent = data2.current.weather[0].icon;
+console.log(currentCityIcon);
+// use this url syntax to pass the right icon into the url to display it http://openweathermap.org/img/wn/10d@2x.png
+
+// display weather
+
+
+            var todayTemp = document.querySelector('.todayTemp');
+
+            todayTemp.textContent = data2.current.temp + ' ° F';
+
+            var todayWind = document.querySelector('.todayWind');
+
+            todayWind.textContent = data2.current.wind_speed + ' mph';
+
+            var todayHumidity = document.querySelector('.todayHumidity');
+
+            todayHumidity.textContent = data2.current.humidity + '%';
+
+            var todayUv = document.querySelector('.todayUv');
+
+            todayUv.textContent = data2.current.uvi;
+
+            // code to log whether background color class should switch
+            // if (data2.current.uvi <=2) {
+            //   console.log(favorable);
+            // } else if (data2.current.uvi >=5){
+            //   console.log(moderate);
+            // } else {
+            //   console.log(severe)}
+
+
+            // code to display date
+            let today = new Date().toLocaleDateString();
+
+            var nextDate = new Date();
+            nextDate.setDate(nextDate.getDate() + 1);
+
+            console.log(today);
+            console.log(nextDate);
+
+            var currentDate = document.querySelector('.currentDate');
+            currentDate.textContent = today;
+
+            // code to display 5 day forecast
+
+            // create a for loop to loop through the daily forecast and show the future forecast for the next 5 days and create a card for each day with the date, icon, temp, wind, humidity
+
+            var fivedayResults = document.querySelector('.fivedayResults');
+
+            for (var i = 0; i < data2.daily.length; i++) {
+              var fivedayContainer = document.createElement('div');
+              fivedayContainer.setAttribute('class', '.col-sm-2 p-3');
+              var fivedayCard = document.createElement('div');
+              fivedayCard.setAttribute('class', 'card');
+              var fivedayCardBody = document.createElement('div');
+              fivedayCardBody.setAttribute('class', 'card-body card-color');
+              //  Need to figure out date part so it shows the new date for each container (right now just showing dt value from data) maybe easier to use moment.js
+              var fivedayDate = document.createElement('h5');
+              fivedayDate.textContent = data2.daily[i].dt;
+              // var readable_date = (dtDate).toDateString(); 
+              // console.log(readable_date);
+              // fivedayDate.textContent = readable_date;  
+
+              var fivedayTemp = document.createElement('h6');
+              fivedayTemp.textContent = 'Temp: ' + data2.daily[i].temp.day + ' ° F';
+              var fivedayWind = document.createElement('h6');
+              fivedayWind.textContent = 'Wind: ' + data2.daily[i].wind_speed + ' mph';
+
+
+              fivedayResults.append(fivedayContainer);
+              fivedayContainer.append(fivedayCard);
+              fivedayCard.append(fivedayCardBody);
+              fivedayCardBody.append(fivedayDate);
+              fivedayCardBody.append(fivedayTemp);
+              fivedayCardBody.append(fivedayWind);
+            }
+          })
+
+      })
+
   });
 
 
