@@ -1,23 +1,33 @@
-*{
+* {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     padding: 2px;
+
 }
 
-.favorable {
-    background-color: green;
+.favorable::after {
+    color: green;
+    content: " █ favorable"
 }
 
-.moderate {
-    background-color: gray;
+.moderate::after {
+    color: gray;
+    content: " █ moderate"
 }
 
-.severe {
-    background-color: red;
+.severe::after {
+    color: red;
+    content: " █ severe"
+}
+
+.fun-color {
+    color: aliceblue;
+    background-color: coral;
 }
 
 .card-color {
     background-color: aquamarine;
 }
+
 .card-current-color {
     background-color: rgb(217, 175, 237);
 }

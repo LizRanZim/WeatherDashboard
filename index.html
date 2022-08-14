@@ -8,6 +8,8 @@
   <title>Document</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
   <link href="./Develop/style.css" rel="stylesheet">
 
 </head>
@@ -15,10 +17,11 @@
 <body>
 
   <div id="heading">
-    <div class="jumbotron jumbotron-fluid">
+    <div class="fun-color jumbotron jumbotron-fluid">
       <div class="container">
         <h1 class="display-4">Weather Dashboard</h1>
-        <p>Enter a city and click submit to get the weather!</p>
+        <p>Enter a city and click submit to get the weather! After your first city, refresh the app to search for
+          another city!</p>
       </div>
     </div>
   </div>
@@ -29,7 +32,16 @@
     <input type="text" id="searchedCity" class="form-control" placeholder="Search for a city" aria-label="City Name"
       aria-describedby="button-addon2">
     <div class="input-group-append">
-      <button class="btn btn-outline-secondary" type="button" id="button-addon2">Submit</button>
+      <button class="btn fun-color btn-outline-secondary" type="button" id="button-addon2">Submit</button>
+    </div>
+  </div>
+
+  <!-- Cities Searched Area -->
+  <div class="card">
+    <div class="card-body card-searched-color">
+      <h3>Last Searched City</h3>
+      <div class="searchedCity1">
+      </div>
     </div>
   </div>
 
@@ -37,7 +49,7 @@
 
   <div class="card">
     <div class="card-body card-current-color">
-      <h3>Current Forecast for<span class=currentCity>(Choose a City)</span>
+      <h3>Current Forecast for <span class=currentCity>(Choose a City)</span>
       </h3>
       <div class=currentCityIcon>
         <img src='' class=currentCityImg>
@@ -53,67 +65,18 @@
     </div>
   </div>
 
-  <!-- Cities Searched Area -->
-  <div class="card">
-    <div class="card-body card-searched-color">
-      <h3>Searched Cities</h3>
-      <div class="searchedCity1"></div>
 
 
-    </div>
 
-    <!-- Weather Results Area -->
-    <div class="fivedayResults"></div>
-    <!-- <div class="col-sm-2 p-3">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Special title treatment</h5>
-          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-2 p-3">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Special title treatment</h5>
-          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-2 p-3">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Special title treatment</h5>
-          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-2 p-3">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Special title treatment</h5>
-          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-2 p-3">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Special title treatment</h5>
-          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-      </div>
-    </div>
-  </div> -->
+  </div>
+
+  <!-- Weather Results Area -->
+  <div class="fivedayResults"></div>
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
-    <script src="./Develop/script.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+  <script src="./Develop/script.js"></script>
 
 
 

@@ -8,9 +8,10 @@ var searchedCity1 = document.querySelector(".searchedCity1")
 
 searchBtn.addEventListener("click",
 
-  // tests event listener
+
   function () {
-    console.log('fun times');
+    // tests event listener
+    // console.log('fun times');
 
 
     // on click reach into input box
@@ -40,13 +41,6 @@ searchBtn.addEventListener("click",
 
     // get lat and lon of searched city
 
-
-
-    // function () {
-
-    // }
-
-    // Replace url with https://api.openweathermap.org/data/2.5/onecall?lat=33.44&lon=-94.04&exclude=hourly,daily&appid={API key}
 
     var queryLatLon = 'http://api.openweathermap.org/data/2.5/weather?q=' + searchedCity + '&units=imperial&APPID=555236abef175d6b5cdeb815c985d1b6';
 
@@ -83,22 +77,20 @@ searchBtn.addEventListener("click",
             console.log(data2);
 
             // display icons logic for curent weather
-var currentCityIcon = document.querySelector('.currentCityImg');
+            var currentCityIcon = document.querySelector('.currentCityImg');
 
-var currentCityIconCode = data2.current.weather[0].icon
-console.log(currentCityIconCode);
-
-
-var queryGetIcon = 'https://openweathermap.org/img/wn/' + currentCityIconCode + '@2x.png';
-
-console.log(queryGetIcon);
-
-currentCityIcon.setAttribute('src', queryGetIcon);
+            var currentCityIconCode = data2.current.weather[0].icon
+            console.log(currentCityIconCode);
 
 
-// use this url syntax to pass the right icon into the url to display it http://openweathermap.org/img/wn/10d@2x.png
+            var queryGetIcon = 'https://openweathermap.org/img/wn/' + currentCityIconCode + '@2x.png';
 
-// display weather
+            console.log(queryGetIcon);
+
+            currentCityIcon.setAttribute('src', queryGetIcon);
+
+
+            // display current weather
 
 
             var todayTemp = document.querySelector('.todayTemp');
@@ -114,52 +106,51 @@ currentCityIcon.setAttribute('src', queryGetIcon);
             todayHumidity.textContent = data2.current.humidity + '%';
 
             var todayUv = document.querySelector('.todayUv');
-
             todayUv.textContent = data2.current.uvi;
 
-            // code to log whether background color class should switch
-            // if (data2.current.uvi <=2) {
-            //   console.log(favorable);
-            // } else if (data2.current.uvi >=5){
-            //   console.log(moderate);
-            // } else {
-            //   console.log(severe)}
+            // this sets the color to change depending on uvi value however it is causing the uvi not to change on when I enter a new city. If I comment it out the uvi updates as expected.
+            if (data2.current.uvi >= 0 && data2.current.uvi <= 2) {
+              console.log('favorable');
+              todayUv.setAttribute('class', 'favorable');
 
 
-            // // code to display date
-            // let today = new Date().toLocaleDateString();
+            } else if (data2.current.uvi > 2 && data2.current.uvi < 6) {
+              console.log('moderate');
+              todayUv.setAttribute('class', 'moderate');
 
-            // var nextDate = new Date();
-            // nextDate.setDate(nextDate.getDate() + 1);
+            } else {
+              console.log('severe');
+              todayUv.setAttribute('class', 'severe');
 
-            // // console.log(today);
-            // // console.log(nextDate);
+            }
 
-           
+
+
+            // Code to set the date and array so that for loop can grab it
+
 
             var todayMoment = moment().format("MMM Do YYYY");
-var Day1Moment = moment().add(1, 'days').format("MMM Do YYYY");
-var Day2Moment = moment().add(2, 'days').format("MMM Do YYYY");
-var Day3Moment = moment().add(3, 'days').format("MMM Do YYYY");
-var Day4Moment = moment().add(4, 'days').format("MMM Do YYYY");
-var Day5Moment = moment().add(5, 'days').format("MMM Do YYYY");
+            var Day1Moment = moment().add(1, 'days').format("MMM Do YYYY");
+            var Day2Moment = moment().add(2, 'days').format("MMM Do YYYY");
+            var Day3Moment = moment().add(3, 'days').format("MMM Do YYYY");
+            var Day4Moment = moment().add(4, 'days').format("MMM Do YYYY");
+            var Day5Moment = moment().add(5, 'days').format("MMM Do YYYY");
 
 
-console.log(todayMoment)
-console.log(Day1Moment)
-console.log(Day2Moment)
-console.log(Day3Moment)
-console.log(Day4Moment)
-console.log(Day5Moment)
+            console.log(todayMoment)
+            console.log(Day1Moment)
+            console.log(Day2Moment)
+            console.log(Day3Moment)
+            console.log(Day4Moment)
+            console.log(Day5Moment)
 
-var DaysMoment = [Day1Moment,Day2Moment,Day3Moment,Day4Moment,Day5Moment]
+            var DaysMoment = [Day1Moment, Day2Moment, Day3Moment, Day4Moment, Day5Moment]
 
-var currentDate = document.querySelector('.currentDate');
-currentDate.textContent = todayMoment;
+            var currentDate = document.querySelector('.currentDate');
+            currentDate.textContent = todayMoment;
 
             // code to display 5 day forecast
 
-            // create a for loop to loop through the daily forecast and show the future forecast for the next 5 days and create a card for each day with the date, icon, temp, wind, humidity
 
             var fivedayResults = document.querySelector('.fivedayResults');
 
@@ -172,12 +163,28 @@ currentDate.textContent = todayMoment;
               fivedayCardBody.setAttribute('class', 'card-body card-color');
 
 
-                         
+
               var fivedayDate = document.createElement('h5');
-        
+
 
               fivedayDate.textContent = DaysMoment[i];
-            
+
+              // creates icon for 5 day
+
+              var fiveDayIcon = document.createElement('img');
+
+              var FiveDayCityIconCode = data2.daily[i].weather[0].icon
+              console.log(FiveDayCityIconCode);
+
+
+              var FiveDayQueryGetIcon = 'https://openweathermap.org/img/wn/' + FiveDayCityIconCode + '@2x.png';
+
+              console.log(FiveDayQueryGetIcon);
+
+              fiveDayIcon.setAttribute('src', FiveDayQueryGetIcon);
+
+
+              // creates html and populates it based on weather data
 
               var fivedayTemp = document.createElement('h6');
               fivedayTemp.textContent = 'Temp: ' + data2.daily[i].temp.day + ' ° F';
@@ -190,6 +197,7 @@ currentDate.textContent = todayMoment;
               fivedayContainer.append(fivedayCard);
               fivedayCard.append(fivedayCardBody);
               fivedayCardBody.append(fivedayDate);
+              fivedayCardBody.append(fiveDayIcon)
               fivedayCardBody.append(fivedayTemp);
               fivedayCardBody.append(fivedayWind);
               fivedayCardBody.append(fivedayHumidity);
@@ -197,40 +205,5 @@ currentDate.textContent = todayMoment;
           })
 
       })
-
+    return
   });
-
-
-
-
-
-//   Test it out as hard code, reach into box, grab value of input box, get strings together use first part of string + for other part of string
-
-// Once you have the data for the first call, you have to make another call in the same function, you might run into might have to be a nested call or do it with some variables
-
-// Once you get data back, extract that data into variables and grab the data you want to put in those variables
-
-
-
-
-// JSON object is what the object will return store as if we have variable called response we would use dot notation to get to the variable we want response.current.clouds for weather we want response.current.weather[0] and that would give us what is in curly and then to dig deeper into the array we would do response.current.weather.[0].main to grab that value
-
-
-
-
-
-// fetch the data from the weather API current weather and future forecast
-
-
-
-
-
-// feature 2 save data to display
-
-
-// declare vars for where the data will show
-// declare vars for what data will be passed to API
-// function to search for a city on click
-// function to check for the city data on day 1 through 4
-// display the data
-
