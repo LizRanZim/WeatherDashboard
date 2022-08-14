@@ -42,7 +42,7 @@ searchBtn.addEventListener("click",
     // get lat and lon of searched city
 
 
-    var queryLatLon = 'http://api.openweathermap.org/data/2.5/weather?q=' + searchedCity + '&units=imperial&APPID=555236abef175d6b5cdeb815c985d1b6';
+    var queryLatLon = 'https://api.openweathermap.org/data/2.5/weather?q=' + searchedCity + '&units=imperial&APPID=555236abef175d6b5cdeb815c985d1b6';
 
     console.log(queryLatLon);
 
