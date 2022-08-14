@@ -54,6 +54,8 @@ searchBtn.addEventListener("click",
 
     // Resource > https://openweathermap.org/api/geocoding-api
 
+    // add if statement so that if response is 404, return message that states 'We couldn't find that city, please try again'
+    // if response ===404, 
 
     fetch(queryLatLon)
 
@@ -142,19 +144,22 @@ currentCityIcon.setAttribute('src', queryGetIcon);
 
             var fivedayResults = document.querySelector('.fivedayResults');
 
-            for (var i = 0; i < data2.daily.length; i++) {
+            for (var i = 0; i < 5; i++) {
               var fivedayContainer = document.createElement('div');
               fivedayContainer.setAttribute('class', '.col-sm-2 p-3');
               var fivedayCard = document.createElement('div');
               fivedayCard.setAttribute('class', 'card');
               var fivedayCardBody = document.createElement('div');
               fivedayCardBody.setAttribute('class', 'card-body card-color');
+
+
               //  Need to figure out date part so it shows the new date for each container (right now just showing dt value from data) maybe easier to use moment.js
               // https://stackoverflow.com/questions/53403249/using-moment-object-in-for-loop
 
               
               var fivedayDate = document.createElement('h5');
-
+              // const date = moment();
+              // fivedayDate.push({ date: date.add(1, "days").format("YYYY-MM-DD") });
 
               fivedayDate.textContent = data2.daily[i].dt;
               // var readable_date = (dtDate).toDateString(); 
@@ -165,7 +170,8 @@ currentCityIcon.setAttribute('src', queryGetIcon);
               fivedayTemp.textContent = 'Temp: ' + data2.daily[i].temp.day + ' ° F';
               var fivedayWind = document.createElement('h6');
               fivedayWind.textContent = 'Wind: ' + data2.daily[i].wind_speed + ' mph';
-
+              var fivedayHumidity = document.createElement('h6');
+              fivedayHumidity.textContent = 'Humidity: ' + data2.daily[i].humidity + '%';
 
               fivedayResults.append(fivedayContainer);
               fivedayContainer.append(fivedayCard);
@@ -173,6 +179,7 @@ currentCityIcon.setAttribute('src', queryGetIcon);
               fivedayCardBody.append(fivedayDate);
               fivedayCardBody.append(fivedayTemp);
               fivedayCardBody.append(fivedayWind);
+              fivedayCardBody.append(fivedayHumidity);
             }
           })
 

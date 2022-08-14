@@ -1,6 +1,6 @@
 *{
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    padding: 5px;
+    padding: 2px;
 }
 
 .favorable {
@@ -17,4 +17,11 @@
 
 .card-color {
     background-color: aquamarine;
+}
+.card-current-color {
+    background-color: rgb(217, 175, 237);
+}
+
+.card-searched-color {
+    background-color: khaki;
 }
