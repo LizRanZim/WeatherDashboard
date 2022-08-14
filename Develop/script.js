@@ -126,17 +126,36 @@ currentCityIcon.setAttribute('src', queryGetIcon);
             //   console.log(severe)}
 
 
-            // code to display date
-            let today = new Date().toLocaleDateString();
+            // // code to display date
+            // let today = new Date().toLocaleDateString();
 
-            var nextDate = new Date();
-            nextDate.setDate(nextDate.getDate() + 1);
+            // var nextDate = new Date();
+            // nextDate.setDate(nextDate.getDate() + 1);
 
-            console.log(today);
-            console.log(nextDate);
+            // // console.log(today);
+            // // console.log(nextDate);
 
-            var currentDate = document.querySelector('.currentDate');
-            currentDate.textContent = today;
+           
+
+            var todayMoment = moment().format("MMM Do YYYY");
+var Day1Moment = moment().add(1, 'days').format("MMM Do YYYY");
+var Day2Moment = moment().add(2, 'days').format("MMM Do YYYY");
+var Day3Moment = moment().add(3, 'days').format("MMM Do YYYY");
+var Day4Moment = moment().add(4, 'days').format("MMM Do YYYY");
+var Day5Moment = moment().add(5, 'days').format("MMM Do YYYY");
+
+
+console.log(todayMoment)
+console.log(Day1Moment)
+console.log(Day2Moment)
+console.log(Day3Moment)
+console.log(Day4Moment)
+console.log(Day5Moment)
+
+var DaysMoment = [Day1Moment,Day2Moment,Day3Moment,Day4Moment,Day5Moment]
+
+var currentDate = document.querySelector('.currentDate');
+currentDate.textContent = todayMoment;
 
             // code to display 5 day forecast
 
@@ -153,18 +172,12 @@ currentCityIcon.setAttribute('src', queryGetIcon);
               fivedayCardBody.setAttribute('class', 'card-body card-color');
 
 
-              //  Need to figure out date part so it shows the new date for each container (right now just showing dt value from data) maybe easier to use moment.js
-              // https://stackoverflow.com/questions/53403249/using-moment-object-in-for-loop
-
-              
+                         
               var fivedayDate = document.createElement('h5');
-              // const date = moment();
-              // fivedayDate.push({ date: date.add(1, "days").format("YYYY-MM-DD") });
+        
 
-              fivedayDate.textContent = data2.daily[i].dt;
-              // var readable_date = (dtDate).toDateString(); 
-              // console.log(readable_date);
-              // fivedayDate.textContent = readable_date;  
+              fivedayDate.textContent = DaysMoment[i];
+            
 
               var fivedayTemp = document.createElement('h6');
               fivedayTemp.textContent = 'Temp: ' + data2.daily[i].temp.day + ' ° F';
