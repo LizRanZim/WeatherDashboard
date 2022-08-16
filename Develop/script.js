@@ -94,6 +94,7 @@ function getWeather(event) {
   
         searchedCityBtn.setAttribute('value', searchedCity);
         searchedCityBtn.setAttribute('id', searchedCity);
+        searchedCityBtn.setAttribute('class','btn fun-color btn-outline-secondary');
   
         searchedCityBtn.addEventListener('click', getWeather);
   
@@ -101,9 +102,6 @@ function getWeather(event) {
   
         searchedCity1.append(searchedCityBtn);
       }
-
-
-      // use something with this: location.reload(); but when I replace url with this value the page is reloaded
 
 
 
@@ -146,7 +144,7 @@ function getWeather(event) {
           var todayUv = document.querySelector('#todayUv');
           todayUv.textContent = data2.current.uvi;
 
-          // ***FIXED**this sets the color to change depending on uvi value however it is causing the uvi not to change on when I enter a new city. If I comment it out the uvi updates as expected.
+          // ***FIXED**this sets the color to change depending on uvi value 
           if (data2.current.uvi >= 0 && data2.current.uvi <= 2) {
             console.log('favorable');
             todayUv.setAttribute('class', 'favorable');
@@ -245,6 +243,8 @@ function getWeather(event) {
     })
   return
 }
+
+// ***need to fix, when made buttons for search history, the 5 day forecast isn't updating and switching for the new city when clicked
 
   // on page load add get from local storage
 
