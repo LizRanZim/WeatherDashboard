@@ -35,7 +35,10 @@ searchBtn.addEventListener("click",
     // gets value of searched city and displays it in searched city area
     var getSearchedCity = localStorage.getItem("searchedCity1");
 
-    searchedCity1.textContent = JSON.parse(getSearchedCity);
+    // *** make the searched city a url using a href from line 76, will need to do this after line 76   
+    // searchedCity1.textContent = JSON.parse(getSearchedCity);
+
+    // ***need to create an a href here that reloads the page with the value of searched city already filled in
 
     // gets value of searched city and puts it in url for the fetch command
 
@@ -45,6 +48,7 @@ searchBtn.addEventListener("click",
     var queryLatLon = 'https://api.openweathermap.org/data/2.5/weather?q=' + searchedCity + '&units=imperial&APPID=555236abef175d6b5cdeb815c985d1b6';
 
     console.log(queryLatLon);
+
 
     // Resource > https://openweathermap.org/api/geocoding-api
 
@@ -68,6 +72,23 @@ searchBtn.addEventListener("click",
         var queryGetWeather = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + latSearchedCity + '&lon=' + lonSearchedCity + '&exclude=hourly,minutely&units=imperial&APPID=555236abef175d6b5cdeb815c985d1b6';
 
         console.log(queryGetWeather);
+
+        // sets url for searched city to local storage
+        localStorage.setItem("searchedCityurl", JSON.stringify(queryGetWeather));
+
+
+        // ***applies url for searched city to searched city, not working
+        var searchedCityurl = document.createElement('a');
+
+        // creates link to point to Boston Data API
+        searchedCityurl.textContent = JSON.parse(getSearchedCity);
+
+        searchedCityurl.setAttribute('href', queryGetWeather);
+        searchedCity1.append(searchedCityurl)
+
+        // use something with this: location.reload(); but when I replace url with this value the page is reloaded
+
+
 
         fetch(queryGetWeather)
           .then(function (response) {
@@ -105,10 +126,10 @@ searchBtn.addEventListener("click",
 
             todayHumidity.textContent = data2.current.humidity + '%';
 
-            var todayUv = document.querySelector('.todayUv');
+            var todayUv = document.querySelector('#todayUv');
             todayUv.textContent = data2.current.uvi;
 
-            // this sets the color to change depending on uvi value however it is causing the uvi not to change on when I enter a new city. If I comment it out the uvi updates as expected.
+            // ***FIXED**this sets the color to change depending on uvi value however it is causing the uvi not to change on when I enter a new city. If I comment it out the uvi updates as expected.
             if (data2.current.uvi >= 0 && data2.current.uvi <= 2) {
               console.log('favorable');
               todayUv.setAttribute('class', 'favorable');
@@ -207,3 +228,12 @@ searchBtn.addEventListener("click",
       })
     return
   });
+
+
+  // on page load add get from local storage
+
+  // window.location API location.refresh will allow to get access to current url and history of url, give access to reload, upon reload, upon reload get search city from local storage and load the page with that info
+
+  // init on page load store lat and lon into local storage
+
+  // stretch goal, don't need call lat lon API on page load since its already in local storage
