@@ -2,9 +2,9 @@
 
 // addEventListener to the search button
 
-var searchBtn = document.querySelector("#button-addon2");
+let searchBtn = document.querySelector("#button-addon2");
 
-var searchedCity1 = document.querySelector(".searchedCity1")
+let searchedCity1 = document.querySelector(".searchedCity1")
 
 searchBtn.addEventListener("click", getWeather);
 
@@ -12,22 +12,28 @@ function getWeather(event) {
   // tests event listener
   // console.log('fun times');
 
+
+
   console.log(event)
 
   // on click reach into input box
-  var searchedCity
+  let searchedCity
+  let searchedCityInput;
 
   if (event.srcElement.id === 'button-addon2') {
-    var searchedCityInput = document.querySelector("#searchedCity").value;
+    searchedCityInput = document.querySelector("#searchedCity").value;
+    document.querySelector("#searchedCity").value = '';
+
   } else {
-    var searchedCityInput = event.srcElement.id;
+    console.log(event.srcElement.id);
+    searchedCityInput = event.srcElement.id;
   }
 
-  var searchedCityHero = document.querySelector('.currentCity')
+  let searchedCityHero = document.querySelector('.currentCity')
 
-  // assign var 
+  // assign let 
 
-  // assign input value to var above
+  // assign input value to let above
   searchedCity = searchedCityInput;
   console.log(searchedCity);
 
@@ -36,8 +42,8 @@ function getWeather(event) {
   // sets value of searched city to local storage
   localStorage.setItem("searchedCity1", JSON.stringify(searchedCity));
 
-  // gets value of searched city and displays it in searched city area
-  var getSearchedCity = localStorage.getItem("searchedCity1");
+  // // gets value of searched city and displays it in searched city area
+  // let getSearchedCity = localStorage.getItem("searchedCity1");
 
   // *** make the searched city a url using a href from line 76, will need to do this after line 76   
   // searchedCity1.textContent = JSON.parse(getSearchedCity);
@@ -49,7 +55,7 @@ function getWeather(event) {
   // get lat and lon of searched city
 
 
-  var queryLatLon = 'https://api.openweathermap.org/data/2.5/weather?q=' + searchedCity + '&units=imperial&APPID=555236abef175d6b5cdeb815c985d1b6';
+  let queryLatLon = 'https://api.openweathermap.org/data/2.5/weather?q=' + searchedCity + '&units=imperial&APPID=555236abef175d6b5cdeb815c985d1b6';
 
   console.log(queryLatLon);
 
@@ -67,27 +73,29 @@ function getWeather(event) {
     .then(function (data) {
       console.log(data);
 
-      var latSearchedCity = data.coord.lat
+      let latSearchedCity = data.coord.lat
       console.log(latSearchedCity);
 
-      var lonSearchedCity = data.coord.lon
+      let lonSearchedCity = data.coord.lon
       console.log(lonSearchedCity);
 
-      var queryGetWeather = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + latSearchedCity + '&lon=' + lonSearchedCity + '&exclude=hourly,minutely&units=imperial&APPID=555236abef175d6b5cdeb815c985d1b6';
+      let queryGetWeather = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + latSearchedCity + '&lon=' + lonSearchedCity + '&exclude=hourly,minutely&units=imperial&APPID=555236abef175d6b5cdeb815c985d1b6';
 
       console.log(queryGetWeather);
+console.log(event.srcElement.id);
 
       if (event.srcElement.id === 'button-addon2') {
+
         
         // sets url for searched city to local storage
-        localStorage.setItem("searchedCityurl", JSON.stringify(queryGetWeather));
+        localStorage.setItem("searchedCityurl",queryGetWeather);
   
   
         // try creating a button instead
         // add an event listener that on click calls get weather w/ the city name
   
         // ***applies url for searched city to searched city, not working
-        var searchedCityBtn = document.createElement('button');
+        let searchedCityBtn = document.createElement('button');
   
         // creates link to point to Boston Data API
         searchedCityBtn.textContent = searchedCity;
@@ -113,13 +121,13 @@ function getWeather(event) {
           console.log(data2);
 
           // display icons logic for curent weather
-          var currentCityIcon = document.querySelector('.currentCityImg');
+          let currentCityIcon = document.querySelector('.currentCityImg');
 
-          var currentCityIconCode = data2.current.weather[0].icon
+          let currentCityIconCode = data2.current.weather[0].icon
           console.log(currentCityIconCode);
 
 
-          var queryGetIcon = 'https://openweathermap.org/img/wn/' + currentCityIconCode + '@2x.png';
+          let queryGetIcon = 'https://openweathermap.org/img/wn/' + currentCityIconCode + '@2x.png';
 
           console.log(queryGetIcon);
 
@@ -129,19 +137,19 @@ function getWeather(event) {
           // display current weather
 
 
-          var todayTemp = document.querySelector('.todayTemp');
+          let todayTemp = document.querySelector('.todayTemp');
 
           todayTemp.textContent = data2.current.temp + ' ° F';
 
-          var todayWind = document.querySelector('.todayWind');
+          let todayWind = document.querySelector('.todayWind');
 
           todayWind.textContent = data2.current.wind_speed + ' mph';
 
-          var todayHumidity = document.querySelector('.todayHumidity');
+          let todayHumidity = document.querySelector('.todayHumidity');
 
           todayHumidity.textContent = data2.current.humidity + '%';
 
-          var todayUv = document.querySelector('#todayUv');
+          let todayUv = document.querySelector('#todayUv');
           todayUv.textContent = data2.current.uvi;
 
           // ***FIXED**this sets the color to change depending on uvi value 
@@ -165,12 +173,12 @@ function getWeather(event) {
           // Code to set the date and array so that for loop can grab it
 
 
-          var todayMoment = moment().format("MMM Do YYYY");
-          var Day1Moment = moment().add(1, 'days').format("MMM Do YYYY");
-          var Day2Moment = moment().add(2, 'days').format("MMM Do YYYY");
-          var Day3Moment = moment().add(3, 'days').format("MMM Do YYYY");
-          var Day4Moment = moment().add(4, 'days').format("MMM Do YYYY");
-          var Day5Moment = moment().add(5, 'days').format("MMM Do YYYY");
+          let todayMoment = moment().format("MMM Do YYYY");
+          let Day1Moment = moment().add(1, 'days').format("MMM Do YYYY");
+          let Day2Moment = moment().add(2, 'days').format("MMM Do YYYY");
+          let Day3Moment = moment().add(3, 'days').format("MMM Do YYYY");
+          let Day4Moment = moment().add(4, 'days').format("MMM Do YYYY");
+          let Day5Moment = moment().add(5, 'days').format("MMM Do YYYY");
 
 
           console.log(todayMoment)
@@ -180,40 +188,60 @@ function getWeather(event) {
           console.log(Day4Moment)
           console.log(Day5Moment)
 
-          var DaysMoment = [Day1Moment, Day2Moment, Day3Moment, Day4Moment, Day5Moment]
+          let DaysMoment = [Day1Moment, Day2Moment, Day3Moment, Day4Moment, Day5Moment]
 
-          var currentDate = document.querySelector('.currentDate');
+          let currentDate = document.querySelector('.currentDate');
           currentDate.textContent = todayMoment;
 
           // code to display 5 day forecast
 
 
-          var fivedayResults = document.querySelector('.fivedayResults');
+          let fivedayResults = document.querySelector('.fivedayResults');
+          console.log(fivedayResults);
+          console.dir(fivedayResults);
+          // if fiveDayResults has a child ||
+          if (fivedayResults.children.length === 1) {
+            /// remove function
+            fivedayResults.children[0].remove();
+          } 
+          // if there exist a fivedayconating or the dom
+          // let fivedayContainer = document.querySelector('#fiveDayContainer');
+          // if (fivedayContainer !== null) {
+          //   fivedayContainer.remove()
+          // }
+          // -- remove that container element.remove
 
-          for (var i = 0; i < 5; i++) {
-            var fivedayContainer = document.createElement('div');
-            fivedayContainer.setAttribute('class', '.col-sm-2 p-3');
-            var fivedayCard = document.createElement('div');
+
+          const fivedayContainer = document.createElement('div');
+          fivedayContainer.setAttribute('class', '.col-sm-2 p-3');
+          fivedayContainer.setAttribute('id', 'fiveDayContainer');
+          
+          for (let i = 0; i < 5; i++) {
+            console.log('!!!!!!!',data2.daily);
+
+            // look here to try figure it out, because the div should not be recreating itself
+            
+            let fivedayCard = document.createElement('div');
             fivedayCard.setAttribute('class', 'card');
-            var fivedayCardBody = document.createElement('div');
+            let fivedayCardBody = document.createElement('div');
             fivedayCardBody.setAttribute('class', 'card-body card-color');
 
 
 
-            var fivedayDate = document.createElement('h5');
+            let fivedayDate = document.createElement('h5');
 
 
             fivedayDate.textContent = DaysMoment[i];
 
             // creates icon for 5 day
 
-            var fiveDayIcon = document.createElement('img');
+            let fiveDayIcon = document.createElement('img');
 
-            var FiveDayCityIconCode = data2.daily[i].weather[0].icon
+            let FiveDayCityIconCode = data2.daily[i].weather[0].icon
             console.log(FiveDayCityIconCode);
 
 
-            var FiveDayQueryGetIcon = 'https://openweathermap.org/img/wn/' + FiveDayCityIconCode + '@2x.png';
+            let FiveDayQueryGetIcon = 'https://openweathermap.org/img/wn/' + FiveDayCityIconCode + '@2x.png';
 
             console.log(FiveDayQueryGetIcon);
 
@@ -222,11 +250,11 @@ function getWeather(event) {
 
             // creates html and populates it based on weather data
 
-            var fivedayTemp = document.createElement('h6');
+            let fivedayTemp = document.createElement('h6');
             fivedayTemp.textContent = 'Temp: ' + data2.daily[i].temp.day + ' ° F';
-            var fivedayWind = document.createElement('h6');
+            let fivedayWind = document.createElement('h6');
             fivedayWind.textContent = 'Wind: ' + data2.daily[i].wind_speed + ' mph';
-            var fivedayHumidity = document.createElement('h6');
+            let fivedayHumidity = document.createElement('h6');
             fivedayHumidity.textContent = 'Humidity: ' + data2.daily[i].humidity + '%';
 
             fivedayResults.append(fivedayContainer);
