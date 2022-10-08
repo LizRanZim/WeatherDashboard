@@ -55,7 +55,7 @@ function getWeather(event) {
   // get lat and lon of searched city
 
 
-  let queryLatLon = 'https://api.openweathermap.org/data/2.5/weather?q=' + searchedCity + '&units=imperial&APPID=555236abef175d6b5cdeb815c985d1b6';
+  let queryLatLon = 'https://api.openweathermap.org/data/2.5/weather?q=' + searchedCity + '&units=imperial&APPID=DELETED';
 
   console.log(queryLatLon);
 
