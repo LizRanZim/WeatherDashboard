@@ -79,7 +79,7 @@ function getWeather(event) {
       let lonSearchedCity = data.coord.lon
       console.log(lonSearchedCity);
 
-      let queryGetWeather = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + latSearchedCity + '&lon=' + lonSearchedCity + '&exclude=hourly,minutely&units=imperial&APPID=555236abef175d6b5cdeb815c985d1b6';
+      let queryGetWeather = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + latSearchedCity + '&lon=' + lonSearchedCity + '&exclude=hourly,minutely&units=imperial&APPID=DELETED';
 
       console.log(queryGetWeather);
 console.log(event.srcElement.id);
